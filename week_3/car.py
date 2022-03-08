@@ -1,5 +1,5 @@
-import csv
-import os
+from csv import reader
+from os.path import splitext
 
 
 class CarBase:
@@ -20,12 +20,12 @@ class CarBase:
     @staticmethod
     def foto_file_check(value):
         # Проверка на допустимый формат файла
-        if os.path.splitext(value)[-1] not in ['.jpg', '.jpeg', '.png', '.gif']:
+        if splitext(value)[-1] not in ['.jpg', '.jpeg', '.png', '.gif']:
             raise ValueError
         return value
 
     def get_photo_file_ext(self):
-        return os.path.splitext(self.photo_file_name)[1]
+        return splitext(self.photo_file_name)[1]
 
 
 class Car(CarBase):
@@ -89,9 +89,9 @@ def get_car_list(csv_filename):
     # Считывание данных и внесение данных в список
     car_list = []
     with open(csv_filename) as csv_fd:
-        reader = csv.reader(csv_fd, delimiter=';')
-        next(reader)
-        for row in reader:
+        read = reader(csv_fd, delimiter=';')
+        next(read)
+        for row in read:
             try:
                 car = parser(row)
                 if car is not None:
