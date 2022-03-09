@@ -8,6 +8,7 @@ class File:
     def __init__(self, path):
         self.path = path
         self.position_now = 0
+        self.current_position = 0
 
         if not exists(self.path):
             open(self.path, 'w').close()
@@ -35,14 +36,22 @@ class File:
 
     def __next__(self):
         with open(self.path, 'r') as f:
-            f.seek(self.position_now)
+            f.seek(self.current_position)
 
             line = f.readline()
             if not line:
                 self.position_now = 0
+                self.current_position = 0
                 raise StopIteration('EOF')
 
             self.current_position = f.tell()
-
             return line
 
+
+with open('multiline.txt', 'w') as file:
+    file.write('line 1\nline 2\nline 3\n')
+
+file_obj = File('multiline.txt')
+
+for row in file_obj:
+    print('row:', row)
