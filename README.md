@@ -17,4 +17,12 @@
 
 * Файл с магическими методами
 
+### [Неделя 5](https://github.com/mike-403/dive_into_Python/tree/master/week_5)
+
+* Клиент для отправки метрик
+
+### [Неделя 6](https://github.com/mike-403/dive_into_Python/tree/master/week_6)
+
+* Сервер для приема метрик
+
 
